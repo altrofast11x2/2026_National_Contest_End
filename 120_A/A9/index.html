@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A9</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<style>
+    input {
+        display: none;
+    }
+
+    body {
+        height: 100vh;
+        background-image: url(./images/background.png);
+        overflow: hidden;
+        background-size: cover;
+    }
+
+    .stage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .track {
+        display: flex;
+        width: 300vw;
+        transition: transform .7s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    .scene {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        gap: 80px;
+        perspective: 1200px;
+    }
+
+    .card {
+        width: 320px;
+        color: #eee;
+        transform: translateZ(0);
+    }
+
+    .nav {
+        position: absolute;
+        bottom: 125px;
+        text-align: center;
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
+        border: 1px solid #333;
+        color: #eee;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav:active {
+        background-color: #555;
+    }
+
+    .prev {
+        left: 50%;
+        transform: translateX(-60px);
+        font-size: 1.2em;
+    }
+
+    .next {
+        left: 50%;
+        transform: translateX(24px);
+        font-size: 1.2em;
+    }
+
+    #s1:checked~.stage .track {
+        transform: translateX(0);
+    }
+
+    #s2:checked~.stage .track {
+        transform: translateX(-100vw);
+    }
+
+    #s3:checked~.stage .track {
+        transform: translateX(-200vw);
+    }
+
+    .nav {
+        display: none;
+    }
+
+    #s1:checked~.stage .p1,
+    #s1:checked~.stage .n1 {
+        display: flex;
+    }
+
+    #s2:checked~.stage .p2,
+    #s2:checked~.stage .n2 {
+        display: flex;
+    }
+
+    #s3:checked~.stage .p3,
+    #s3:checked~.stage .n3 {
+        display: flex;
+    }
+
+    #s1:checked~.stage .p1 {
+        pointer-events: none;
+    }
+
+    #s3:checked~.stage .n3 {
+        pointer-events: none;
+    }
+
+    .tumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 500px;
+    }
+
+    h3 {
+        font-weight: 300;
+        font-size: 1.4em;
+    }
+
+    .author {
+        opacity: 0.7;
+    }
+</style>
+
+<body>
+    <input type="radio" name="slide" id="s1" checked>
+    <input type="radio" name="slide" id="s2">
+    <input type="radio" name="slide" id="s3">
+    <div class="stage">
+        <div class="track">
+            <div class="scene">
+                <div class="card">
+                    <div class="tumb"><img src="./images/1.jpg"></div>
+                    <div class="content">
+                        <h3>삼나무와 초록 밀밭</h3><em class="sub">Cypresses and Green Wheat Field</em>
+                        <p class="author">Vincent van Gogh 1889</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/2.jpg"></div>
+                    <div class="content">
+                        <h3>모델과 화가</h3><em class="sub">The Painter and His Model</em>
+                        <p class="author">Pablo Picasso 1928</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/3.jpg"></div>
+                    <div class="content">
+                        <h3>작은 거리</h3><em class="sub">The Little Street</em>
+                        <p class="author">Johannes Vermeer 1657–1658</p>
+                    </div>
+                </div>
+            </div>
+            <div class="scene">
+                <div class="card">
+                    <div class="tumb"><img src="./images/4.jpg"></div>
+                    <div class="content">
+                        <h3>빈도 알토비티의 초상</h3><em class="sub">Portrait of Bindo Altoviti</em>
+                        <p class="author">Raphael 1515</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/5.jpg"></div>
+                    <div class="content">
+                        <h3>나르시스의 변형</h3><em class="sub">The Metamorphosis of Narcissus</em>
+                        <p class="author">Salvador Dalí 1937</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/6.jpg"></div>
+                    <div class="content">
+                        <h3>베노아의 성모</h3><em class="sub">The Benois Madonna</em>
+                        <p class="author">Leonardo da Vinci 1478–1480</p>
+                    </div>
+                </div>
+            </div>
+            <div class="scene">
+                <div class="card">
+                    <div class="tumb"><img src="./images/7.jpg"></div>
+                    <div class="content">
+                        <h3>과일 바구니를 든 소년</h3><em class="sub">Boy with a Basket of Fruit</em>
+                        <p class="author">Caravaggio 1593–1594</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/8.jpg"></div>
+                    <div class="content">
+                        <h3>들쥐</h3><em class="sub">Young Hare</em>
+                        <p class="author">Albrecht Dürer 1502</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="tumb"><img src="./images/9.jpg"></div>
+                    <div class="content">
+                        <h3>톨레도 풍경</h3><em class="sub">View of Toledo</em>
+                        <p class="author">El Greco 1596–1600</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <label for="s3" class="nav prev p1">&#x276E;</label>
+        <label for="s2" class="nav next n1">&#x276F;</label>
+        <label for="s1" class="nav prev p2">&#x276E;</label>
+        <label for="s3" class="nav next n2">&#x276F;</label>
+        <label for="s2" class="nav prev p3">&#x276E;</label>
+        <label for="s1" class="nav next n3">&#x276F;</label>
+    </div>
+</body>
+
+</html>

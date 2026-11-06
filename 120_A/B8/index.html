@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 45px;
+        width: 200px;
+        height: 30px;
+        font-size: 14px;
+        color: #fff;
+        padding: 0px 12px;
+        margin: 10px 0;
+        border-radius: 8px;
+    }
+
+    .del {
+        border: 0;
+        outline: 0;
+        background: transparent;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .g {
+        background-color: green;
+    }
+
+    .p {
+        background-color: rgb(241, 158, 172);
+    }
+</style>
+
+<body>
+    <ul id="l"></ul>
+    <div class="wrap">
+        <button onclick="n('g')">성공</button>
+        <button onclick="n('p')">실패</button>
+    </div>
+</body>
+<script src="../lib.js"></script>
+<script>
+    function n(value) {
+        const li = nl('li', {
+            innerHTML: `<p>${value === "g" ? "성공하였습니다" : "실패하였습니다"}</p><button onclick="parentElement.remove()" class="del">X</button>`,
+            classList: value
+        })
+        l.append(li)
+        setTimeout(() => {
+            li.remove()
+        }, 5000);
+    }
+</script>
+
+</html>

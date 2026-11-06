@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .container {
+        width: 200px;
+        height: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .tip1 {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .tip1::after {
+        content: attr(data-tip);
+        width: max-content;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        bottom: 120%;
+        transform: translateX(-50%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .tip1:focus:after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .tip1:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .tip2 {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .tip2::after {
+        content: attr(data-tip);
+        width: max-content;
+        height: 20px;
+        position: absolute;
+        transform: translate(10%, 10%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .tip2:focus:after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .tip2:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <button class="tip1" data-tip="“설정” 버튼을 눌러 서비스를 설정할 수 있습니다.">설정</button>
+        <button class="tip2" data-tip="로그아웃되고 메인페이지로 이동합니다.">로그아웃</button>
+    </div>
+</body>
+
+</html>

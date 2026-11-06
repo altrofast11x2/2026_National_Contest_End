@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4</title>
+</head>
+<style>
+*{margin: 0;padding: 0;box-sizing: border-box;list-style: none;text-decoration: none;border-collapse: collapse;color: inherit;}
+table{width: 100%;}img{display: block;object-fit: cover;max-width: 100%;}label,button,input{border: 0;outline: 0;background: transparent;cursor: pointer;}
+.con{width: 1320px;margin: 0 auto;}:root{
+    --navy:#233656;
+    --deep:#11213b;
+    --steel:#8097b9;
+    --sky:#b1ceee;
+    --blue:#0253c7;
+    --back:#1c2d49;
+    --right:#64789b;
+    --bottom:#2b4062;
+}
+/* 공통 */
+.box{width: 0;height: 0;transform-style: preserve-3d;transform: rotateX(-36.7deg) rotateY(45deg);}
+.face{position: absolute;translate: -50% -50%;overflow: hidden;}
+.front{width: var(--w);height: var(--h);transform: translateZ(calc(var(--d)));background: var(--navy);}
+.left{width: var(--d);height: var(--h);transform: rotateY(-90deg) translateZ(calc(var(--w)));background: var(--steel);}
+.top{width: var(--w);height: var(--d);transform: rotateX(90deg) translateZ(calc(var(--h)));background: var(--sky);}
+.back{width: var(--w);height: var(--h);transform: rotateY(180deg)  translateZ(calc(var(--d)));background: var(--back);}
+.right{width: var(--d);height: var(--h);transform: rotateY(90deg)  translateZ(calc(var(--w)));background: var(--right);}
+.bottom{width: var(--w);height: var(--d);transform: rotateX(-90deg)  translateZ(calc(var(--h)));background: var(--bottom);}
+/*  모달 */
+.modal{position: absolute;inset: 0;z-index: 1500;display: grid;place-content: center;visibility: hidden;opacity: 0;transition: all .3s;}
+[name="pop"]:checked + .modal{visibility: visible;opacity: 1;}
+.modal .card{position: relative;width: 520px;border-radius: 10px;padding: 56px 60px 44px;background-color: #fff;transform: translateY(30px);transition: all .3s; box-shadow: 0px 0px 30px rgba(3, 3, 3, .15);}
+[name="pop"]:checked + .modal .card{transform: translateY(0px);}
+.modal .card  h2{font-size: 34px;color: #111;}
+.modal .card  h2 i{font-style: normal;font-weight: 300;margin: 0px 6px;}
+.modal .card  h2 span{font-size: 20px;}
+.greet{margin-top: 12px;font-weight: 15px;color: #555;}
+.modal .card .field{display: block;margin-top: 32px;}
+.modal .card .field span{display: block;font-size: 15px;font-weight: bold;color: #111;}
+.modal .card .field span i{font-style: normal;font-weight: 300;margin: 0px 3px;}
+.modal .card .field span em{font-style: normal;font-weight: 400;font-size: 11px;color: #333;}
+.modal .card .field input{display: block;width: 100%;padding: 12px 2px;border-bottom: 1px solid #111;transition: all .3s;font-size: 16px;}
+.modal .card .field input:focus{border-color: var(--blue);}
+.modal .card button{display: block;width: 100%;padding: 15px 0;margin-top: 34px;background: linear-gradient(90deg, var(--sky),var(--steel));border-radius: 8px;font-weight: 550;font-size: 17px;color: #fff;box-shadow: 0px 0px 4px rgba(3, 3, 3, .35);transition: all .3s;}
+.modal .card button:hover{background: var(--navy);box-shadow: 0px 0px 12px rgba(0, 0, 0, .55);}
+</style>
+<body>
+    <input type="radio" name="pop" id="close" hidden="hidden">
+    <input type="radio" name="pop" id="register" hidden="hidden" checked>
+    <form action="" method="post" class="modal">
+        <label for="close" class="dim"></label>
+        <div class="card">
+            <h2>JoinUs<i>/</i><span>회원가입</span></h2>
+            <p class="greet"></p>
+            <label for="" class="field">
+                <span>NAME<i>/</i><em>이름</em></span>
+                <input type="text" name="u_name" id="u_name" placeholder="이름을 입력하세요." required>
+            </label>
+            <label for="" class="field">
+                <span>EMAIL<i>/</i><em>이메일</em></span>
+                <input type="email" name="u_email" id="u_email" placeholder="이메일을 입력하세요." required>
+            </label>
+            <label for="" class="field">
+                <span>PASSWORD<i>/</i><em>비밀번호</em></span>
+                <input type="password" name="u_pw" id="u_pw" placeholder="비밀번호를 입력하세요." required>
+            </label>
+            <label for="" class="field">
+                <span>PASSWORD CHECK<i>/</i><em>비밀번호 확인</em></span>
+                <input type="password" name="u_pw_c" id="u_pw_c" placeholder="비밀번호를 확인해주세요." required>
+            </label>
+            <button type="submit">회원가입</button>
+        </div>
+    </form>
+</body>
+
+</html>

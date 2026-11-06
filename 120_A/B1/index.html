@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<style>
+    body {
+        display: grid;
+        place-content: center;
+        min-height: 100vh;
+    }
+
+    .wrap {
+        display: flex;
+        align-items: center;
+    }
+
+    #sm {
+        margin: 0px 10px;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <label for="">비밀번호</label>
+        <div class="inner wrap"><small id="sm"></small><input type="password" id="i"></div>
+    </div>
+    <script src="../lib.js"></script>
+    <script>
+        const g = e => {
+            const l = e.length,
+                u = /[A-Z]/.test(e),
+                n = /[0-9]/.test(e),
+                s = /[!@#$%^&*()]/.test(e)
+            i.style.borderColor
+            !l ? "black" :
+                l >= 8 && u && n && s ? "green" && (sm.textContent = '강함', sm.style.color = 'green', i.style.borderColor = "green") :
+                    l >= 6 && (u || n) ? "orange" && (sm.textContent = '보통', sm.style.color = 'orange', i.style.borderColor = "orange") : "red" && (sm.textContent = '약함', sm.style.color = 'red', i.style.borderColor = "red")
+        }
+        i.addEventListener('input', ({ target }) => {
+            g(target.value)
+        })
+    </script>
+</body>
+
+</html>

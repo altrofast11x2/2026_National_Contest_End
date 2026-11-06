@@ -1,0 +1,126 @@
+body{padding-top: 80px;font-family: 'Malgun Gothic', sans-serif;color: var(--navy);}
+header .con .auth-area .me a{display: flex;align-items: center;gap: 10px;font-weight: 550;}
+header .con .auth-area .me img{width: 42px;height: 42px;border-radius: 50%;border: 1px solid var(--navy);}
+header .con .auth-area .auth-btn{display: block;width: 100px;height: 45px;line-height: 45px;font-weight: 550;color: #fff;background: linear-gradient(90deg,var(--sky),var(--steel));text-align: center;border-radius: 25px;box-shadow: 0px 0px 4px rgba(3, 3, 3, .35);transition: all .3s;}
+header .con .auth-area .auth-btn:hover{background: var(--navy);box-shadow: 0px 0px 12px rgba(3, 3, 3, .35);}
+
+/* 공통 버튼 */
+.btn-line,.btn-fill,.btn-del{display: inline-flex;user-select: none;align-items: center;justify-content: center;height: 40px;padding: 0 18px;border-radius: 6px;font-size: 15px;font-weight: 550;cursor: pointer;transition: all .3s;}
+.btn-line{border: 1px solid var(--navy);color: var(--navy);}
+.btn-line:hover{border-color: var(--blue);color: var(--blue);}
+.btn-fill{background: var(--navy);color: #fff;}
+.btn-fill:hover{background: var(--blue);}
+.btn-del{background: #b23b3b;color: #fff;}
+.btn-del:hover{background: #8d2a2a;}
+.empty{padding: 50px 0;text-align: center;font-weight: 550;color: var(--steel);}
+
+/* 모달 입력 요소 */
+#join-form .card,#pet-form .card{max-height: 86vh;overflow-y: auto;}
+.modal .card .field :is(select,textarea){width: 100%;padding: 12px 2px;border-bottom: 1.5px solid #111;font-size: 16px;font-family: inherit;transition: all .3s;}
+.modal .card .field :is(select,textarea):focus{border-color: var(--blue);}
+.modal .card .field textarea{height: 110px;resize: none;}
+.modal .card .field input[type="file"]{width: 100%;padding: 12px 0;border-bottom: 1.5px solid #111;}
+.modal .card .field .row{display: flex;align-items: flex-end;gap: 10px;}
+.modal .card .field .row input{flex: 1;}
+.modal .card .field .row button{width: 120px;margin-top: 0;padding: 11px 0;border-radius: 6px;font-size: 14px;}
+.modal .card .field .msg{display: block;margin-top: 6px;font-size: 13px;font-style: normal;font-weight: 550;color: #b23b3b;}
+.modal .card .field .msg.ok{color: var(--blue);}
+.modal .card .greet b{color: var(--blue);}
+
+/* 펫시터 목록 - 카테고리, 태그 필터 */
+#sitter-page{padding: 60px 0 100px;}
+#sitter-page .cat-list{display: flex;gap: 12px;margin-top: 40px;}
+#sitter-page .cat-list .cat{padding: 10px 26px;border: 1.5px solid #d5dfee;border-radius: 25px;font-size: 15px;font-weight: 550;color: var(--steel);transition: all .3s;}
+#sitter-page .cat-list .cat:hover{border-color: var(--blue);color: var(--blue);}
+#sitter-page .cat-list .cat.on{background: var(--navy);border-color: var(--navy);color: #fff;}
+#sitter-page .tag-list{display: flex;flex-wrap: wrap;gap: 8px;margin-top: 16px;}
+#sitter-page .tag-list .tag{padding: 6px 16px;border: 1px solid #e6edf6;border-radius: 25px;background-color: #f6f9fd;font-size: 14px;font-weight: 550;color: #555;transition: all .3s;}
+#sitter-page .tag-list .tag:hover{border-color: var(--steel);}
+#sitter-page .tag-list .tag.on{background: linear-gradient(90deg,var(--sky),var(--steel));border-color: var(--steel);color: #fff;}
+#sitter-page .list-tools{display: flex;align-items: center;justify-content: space-between;margin: 30px 0 10px;}
+#sitter-page .list-tools .total{font-size: 16px;font-weight: 550;}
+#sitter-page .list-tools .total b{font-size: 22px;color: var(--blue);}
+#sitter-page .list-tools select{height: 42px;padding: 0 12px;border: 1px solid var(--navy);border-radius: 6px;font-size: 15px;font-family: inherit;}
+#sitter-page .wrap,#mypage .fav-wrap{display: grid;grid-template-columns: repeat(3,1fr);gap: 20px;padding: 20px 0;}
+
+/* 펫시터 카드  */
+:is(#sitter-page,#mypage) .card{position: relative;box-shadow: 0px 0px 4px rgba(3, 3, 3, .35);border-radius: 12px;overflow: hidden;transition: all .3s;}
+:is(#sitter-page,#mypage) .card:hover{box-shadow: 0px 0px 8px rgba(0, 0, 0, .55);transform: translateY(-5px);}
+:is(#sitter-page,#mypage) .card img{width: 100%;height: 200px;}
+:is(#sitter-page,#mypage) .card .status{position: absolute;right: 10px;top: 10px;z-index: 10;padding: 5px 10px;border-radius: 25px;font-size: 13px;font-weight: 550;color: #fff;}
+:is(#sitter-page,#mypage) .card .status.ok{background-color: var(--blue);}
+:is(#sitter-page,#mypage) .card .status.bad{background-color: var(--steel);}
+:is(#sitter-page,#mypage) .card .inner-wrap{padding: 20px;}
+:is(#sitter-page,#mypage) .card .info{display: flex;align-items: center;justify-content: space-between;font-size: 15px;}
+:is(#sitter-page,#mypage) .card .info .name{font-size: 20px;font-weight: bold;}
+:is(#sitter-page,#mypage) .card .info .star{color: rgb(255, 174, 0);}
+:is(#sitter-page,#mypage) .card .info .reviews{margin-right: 5px;font-size: 13px;font-weight: 550;color: #555;}
+:is(#sitter-page,#mypage) .card .info .reserve span{font-weight: bold;color: var(--blue);}
+:is(#sitter-page,#mypage) .card .info .location{font-size: 14px;font-weight: 550;color: #5555558e;}
+:is(#sitter-page,#mypage) .card .tags{display: flex;flex-wrap: wrap;align-items: center;gap: 5px;margin: 10px 0;font-size: 14px;font-weight: 550;color: #555555b2;}
+:is(#sitter-page,#mypage) .card .tags li{padding: 3px 7px;border-radius: 25px;background-color: rgba(160, 155, 155, .123);}
+:is(#sitter-page,#mypage) .card .actions{display: flex;align-items: center;justify-content: space-between;margin-top: 15px;}
+:is(#sitter-page,#mypage) .card .actions .price span{font-size: 2.2em;font-family: impact;}
+:is(#sitter-page,#mypage) .card .actions button{margin: 0 3px;padding: 10px 14px;border-radius: 4px;font-weight: 550;transition: all .3s;}
+:is(#sitter-page,#mypage) .card .actions .go-reserve{background-color: var(--navy);color: #fff;}
+:is(#sitter-page,#mypage) .card .actions .go-reserve:hover{background-color: var(--blue);}
+:is(#sitter-page,#mypage) .card .actions .go-reserve:disabled{background-color: #bbb;cursor: not-allowed;}
+:is(#sitter-page,#mypage) .card .actions .go-fav{border: 1px solid var(--navy);color: var(--navy);}
+:is(#sitter-page,#mypage) .card .actions .go-fav:hover{border-color: var(--blue);color: var(--blue);}
+:is(#sitter-page,#mypage) .card .actions .go-fav.on{background-color: var(--blue);border-color: var(--blue);color: #fff;}
+.card .badge{position: absolute;left: 10px;top: 10px;z-index: 10;padding: 5px 10px;border-radius: 25px;background: linear-gradient(90deg,var(--sky),var(--steel));font-size: 13px;font-weight: 550;color: #fff;}
+
+/* 지원 / 예약 / 돌봄 공용 폼 */
+#form-page{padding: 60px 0 100px;}
+#form-page .page-form{display: grid;grid-template-columns: repeat(2,1fr);gap: 26px 30px;margin-top: 50px;padding: 50px 60px;border-radius: 12px;box-shadow: 0px 0px 6px rgba(3, 3, 3, .2);}
+#form-page .page-form .field{display: block;}
+#form-page .page-form .field.wide,#form-page .page-form button{grid-column: 1 / 3;}
+#form-page .page-form .field > span{display: block;margin-bottom: 8px;font-size: 15px;font-weight: bold;}
+#form-page .page-form .field :is(input,select,textarea){width: 100%;padding: 12px 2px;border-bottom: 1.5px solid #111;font-size: 16px;font-family: inherit;transition: all .3s;}
+#form-page .page-form .field :is(input,select,textarea):focus{border-color: var(--blue);}
+#form-page .page-form .field textarea{height: 130px;resize: none;}
+#form-page .page-form .counter{display: block;margin-top: 6px;font-size: 13px;font-style: normal;font-weight: 550;text-align: right;color: var(--steel);}
+#form-page .page-form .field .msg{display: block;margin-top: 6px;font-size: 13px;font-style: normal;font-weight: 550;color: #b23b3b;}
+#form-page .page-form .check-list{display: flex;flex-wrap: wrap;gap: 10px 22px;padding: 12px 0;}
+#form-page .page-form .check-list label{display: flex;align-items: center;gap: 8px;font-size: 15px;font-weight: 550;}
+#form-page .page-form .check-list input{width: 18px;height: 18px;}
+#form-page .page-form button{margin-top: 10px;padding: 16px 0;border-radius: 8px;background: linear-gradient(90deg,var(--sky),var(--steel));box-shadow: 0px 0px 4px rgba(3, 3, 3, .35);font-size: 17px;font-weight: bold;color: #fff;transition: all .3s;}
+#form-page .page-form button:hover{background: var(--navy);box-shadow: 0px 0px 12px rgba(3, 3, 3, .35);}
+
+/* 마이페이지, 관리자 */
+#mypage{padding: 60px 0 100px;}
+#mypage .my-box{margin-top: 50px;padding: 34px 40px;border-radius: 12px;box-shadow: 0px 0px 6px rgba(3, 3, 3, .2);}
+#mypage .box-title{display: flex;align-items: center;justify-content: space-between;padding-bottom: 18px;border-bottom: 2px solid var(--navy);font-size: 1.3em;font-weight: bold;}
+#mypage .my-info{display: flex;align-items: center;gap: 34px;padding-top: 26px;}
+#mypage .my-info > img{width: 130px;height: 130px;border-radius: 50%;border: 1px solid #e6edf6;}
+#mypage .my-info ul{flex: 1;display: grid;grid-template-columns: repeat(2,1fr);gap: 14px 30px;}
+#mypage :is(.my-info,.pet) li{display: flex;gap: 14px;font-size: 15px;}
+#mypage :is(.my-info,.pet) li b{width: 78px;color: var(--steel);}
+#mypage .pet-list{display: grid;grid-template-columns: repeat(2,1fr);gap: 20px;padding-top: 26px;}
+#mypage .pet{display: flex;align-items: center;gap: 20px;padding: 20px;border: 1px solid #e6edf6;border-radius: 10px;}
+#mypage .pet > img{width: 100px;height: 100px;border-radius: 10px;}
+#mypage .pet ul{flex: 1;display: flex;flex-direction: column;gap: 6px;}
+#mypage .list-table{margin-top: 26px;font-size: 15px;}
+#mypage .list-table th{padding: 14px 8px;background-color: #f6f9fd;border-bottom: 1px solid #e6edf6;font-weight: bold;}
+#mypage .list-table td{padding: 14px 8px;border-bottom: 1px solid #eee;text-align: center;}
+#mypage .list-table td.req{max-width: 220px;text-align: left;word-break: break-all;}
+#mypage .list-table td.ctrl{display: flex;justify-content: center;gap: 8px;}
+#mypage .list-table .empty{padding: 40px 0;}
+:is(#sitter-page,#mypage) .card .comment{position: relative;height: 20px;margin: 15px 0;padding: 0 15px;overflow: hidden;}
+:is(#sitter-page,#mypage) .card .comment::before{position: absolute;left: 7px;content: '';width: 3px;height: 100%;background-color: var(--blue);transform: skewX(-8deg);}
+:is(#sitter-page,#mypage) .card .comment .comment-track{--s:20px;animation: slide 12s infinite;}
+:is(#sitter-page,#mypage) .card .comment .comment-track li{height: 20px;line-height: 20px;font-size: 15px;}
+#mypage .list-table td .btn-del{height: 32px;padding: 0 14px;font-size: 14px;}
+
+#event .intro .head,.global-title .kr-title,#mypage .box-title{word-break: keep-all;}
+#event .intro .head{font-size: 39px;line-height: 1.35;}
+:is(#sitter-page,#mypage) .card .comment .comment-track.new{animation: none;color: var(--steel);}
+:is(#sitter-page,#mypage) .card img,#mypage .my-info > img,#mypage .pet > img,header .con .auth-area .me img{object-fit: cover;}
+
+
+.toast-area{position: fixed;right: 30px;bottom: 30px;z-index: 2000;display: flex;flex-direction: column;gap: 10px;}
+.toast{padding: 16px 24px;background: var(--navy);color: #fff;font-weight: 550;box-shadow: 0px 8px 20px rgba(3,3,3,.35);animation: toastin .3s;}
+.toast{padding: 16px 24px;background: var(--navy);color: #fff;font-weight: 550;box-shadow: 0px 8px 20px rgba(3,3,3,.35);animation: toastin .3s;}
+
+.user-head .acts{display: flex;gap: 10px;}
+.user-list .acts,.my-list .acts{display: flex;align-items: center;gap: 8px;}

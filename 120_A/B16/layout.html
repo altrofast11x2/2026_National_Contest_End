@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #dc3545;
+            background-color: #f8d7da;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #007bff;
+            background-color: white;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-btn.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background-color: #0056b3;
+            color: white;
+            border-color: #0056b3;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .todo-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .todo-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .todo-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .todo-item.completed {
+            background-color: #f8f9fa;
+            opacity: 0.8;
+        }
+
+        .todo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .todo-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+
+        .todo-item.completed .todo-title {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .todo-badges {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .priority-high {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .priority-medium {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .priority-low {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .category-badge {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .status-badge {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .todo-description {
+            color: #666;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+
+        .todo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .date-info {
+            display: flex;
+            gap: 15px;
+        }
+
+        .reload-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .reload-btn:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .todo-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .todo-footer {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📋 Todo List</h1>
+
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalCount">0</div>
+                <div class="stat-label">전체</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-label">완료</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="pendingCount">0</div>
+                <div class="stat-label">진행중</div>
+            </div>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active">전체</button>
+            <button class="filter-btn">진행중</button>
+            <button class="filter-btn">완료</button>
+            <button class="filter-btn">높은 우선순위</button>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            데이터를 불러오는 중...
+        </div>
+
+        <div id="error" class="error" style="display: none;"></div>
+
+        <div class="todo-list" id="todoList">
+            <div class="todo-item ">
+                <div class="todo-header">
+                    <h3 class="todo-title">{title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-high">높음</span>
+                        <span class="badge status-badge">진행중</span>
+                    </div>
+                </div>
+                <p class="todo-description">{description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: {dueDate}</span>
+                        <span>📝 생성: {createdAt}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todo-item completed">
+                <div class="todo-header">
+                    <h3 class="todo-title">{title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-medium">보통</span>
+                        <span class="badge status-badge">완료</span>
+                    </div>
+                </div>
+                <p class="todo-description">{description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: {dueDate}</span>
+                        <span>📝 생성: {createdAt}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todo-item ">
+                <div class="todo-header">
+                    <h3 class="todo-title">{title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-medium">보통</span>
+                        <span class="badge status-badge">진행중</span>
+                    </div>
+                </div>
+                <p class="todo-description">{description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: {dueDate}</span>
+                        <span>📝 생성: {createdAt}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todo-item ">
+                <div class="todo-header">
+                    <h3 class="todo-title">{title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-high">높음</span>
+                        <span class="badge status-badge">진행중</span>
+                    </div>
+                </div>
+                <p class="todo-description">{description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: {dueDate}</span>
+                        <span>📝 생성: {createdAt}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="todo-item ">
+                <div class="todo-header">
+                    <h3 class="todo-title">{title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-low">낮음</span>
+                        <span class="badge status-badge">진행중</span>
+                    </div>
+                </div>
+                <p class="todo-description">{description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: {dueDate}</span>
+                        <span>📝 생성: {createdAt}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="../lib.js"></script>
+<script>
+    const data = {
+        "todos": [
+            {
+                "id": 1,
+                "title": "프로젝트 기획서 작성",
+                "description": "새로운 웹 애플리케이션 프로젝트의 기획서를 작성하고 팀원들과 공유",
+                "completed": false,
+                "priority": "high",
+                "category": "업무",
+                "dueDate": "2026-08-05",
+                "createdAt": "2026-07-25"
+            },
+            {
+                "id": 2,
+                "title": "장보기",
+                "description": "마트에서 이번 주 식재료 구매 - 채소, 육류, 생필품",
+                "completed": true,
+                "priority": "medium",
+                "category": "생활",
+                "dueDate": "2026-07-30",
+                "createdAt": "2026-07-28"
+            },
+            {
+                "id": 3,
+                "title": "운동하기",
+                "description": "헬스장에서 1시간 운동 - 유산소 30분, 근력운동 30분",
+                "completed": false,
+                "priority": "medium",
+                "category": "건강",
+                "dueDate": "2026-07-31",
+                "createdAt": "2026-07-29"
+            },
+            {
+                "id": 4,
+                "title": "JavaScript 스터디",
+                "description": "ES6+ 문법 정리 및 실습 예제 작성",
+                "completed": false,
+                "priority": "high",
+                "category": "학습",
+                "dueDate": "2026-08-02",
+                "createdAt": "2026-07-26"
+            },
+            {
+                "id": 5,
+                "title": "친구 만나기",
+                "description": "오랜만에 대학 동창들과 저녁 식사 약속",
+                "completed": false,
+                "priority": "low",
+                "category": "사교",
+                "dueDate": "2026-08-03",
+                "createdAt": "2026-07-27"
+            },
+            {
+                "id": 6,
+                "title": "책 읽기",
+                "description": "클린 코드 책 3장까지 읽고 정리하기",
+                "completed": true,
+                "priority": "medium",
+                "category": "학습",
+                "dueDate": "2026-07-29",
+                "createdAt": "2026-07-24"
+            },
+            {
+                "id": 7,
+                "title": "이메일 정리",
+                "description": "받은 편지함의 중요한 이메일들 폴더별로 정리",
+                "completed": false,
+                "priority": "low",
+                "category": "업무",
+                "dueDate": "2026-08-01",
+                "createdAt": "2026-07-30"
+            },
+            {
+                "id": 8,
+                "title": "블로그 포스팅",
+                "description": "이번 주 학습한 내용을 정리해서 기술 블로그에 포스팅",
+                "completed": false,
+                "priority": "medium",
+                "category": "학습",
+                "dueDate": "2026-08-04",
+                "createdAt": "2026-07-28"
+            },
+            {
+                "id": 9,
+                "title": "치과 예약",
+                "description": "정기 검진을 위한 치과 예약 잡기",
+                "completed": true,
+                "priority": "high",
+                "category": "건강",
+                "dueDate": "2026-07-30",
+                "createdAt": "2026-07-25"
+            },
+            {
+                "id": 10,
+                "title": "방 청소",
+                "description": "책상 정리, 바닥 청소, 옷장 정리하기",
+                "completed": false,
+                "priority": "low",
+                "category": "생활",
+                "dueDate": "2026-08-01",
+                "createdAt": "2026-07-29"
+            },
+            {
+                "id": 11,
+                "title": "프레젠테이션 준비",
+                "description": "다음 주 회의에서 발표할 자료 준비 및 연습",
+                "completed": false,
+                "priority": "high",
+                "category": "업무",
+                "dueDate": "2026-08-06",
+                "createdAt": "2026-07-30"
+            },
+            {
+                "id": 12,
+                "title": "온라인 강의 수강",
+                "description": "React 강의 5강까지 완주하기",
+                "completed": false,
+                "priority": "medium",
+                "category": "학습",
+                "dueDate": "2026-08-07",
+                "createdAt": "2026-07-26"
+            }
+        ]
+    }
+    let t = [], f = '전체', p = { high: '높음', medium: '보통', low: '낮음' }
+    t = data.todos; render()
+    $$(".filter-btn").forEach(b => b.onclick = function () {
+        $$(".filter-btn").forEach(x => { x.classList.remove('active') })
+        this.classList.add('active'); f = this.textContent; render()
+    });
+    function render() {
+        const d = t.filter(x => f == '전체' || f == '진행중' && !x.completed || f == '완료' && x.completed || f == '높은 우선순위' && x.priority === 'high')
+        todoList.innerHTML = d.map(x => `
+            <div class="todo-item ${x.completed ? "completed" : ""}">
+                <div class="todo-header">
+                    <h3 class="todo-title">${x.title}</h3>
+                    <div class="todo-badges">
+                        <span class="badge priority-${x.priority}">${p[x.priority]}</span>
+                        <span class="badge status-badge">${x.completed ? "완료" : "진행중"}</span>
+                    </div>
+                </div>
+                <p class="todo-description">${x.description}</p>
+                <div class="todo-footer">
+                    <div class="date-info">
+                        <span>📅 마감: ${x.dueDate}</span>
+                        <span>📝 생성: ${x.createdAt}</span>
+                    </div>
+                </div>
+            </div>
+            `).join('')
+        totalCount.textContent = t.length
+        completedCount.textContent = t.filter(x => x.completed).length
+        pendingCount.textContent = t.filter(x => !x.completed).length
+    }
+</script>
+
+</html>
